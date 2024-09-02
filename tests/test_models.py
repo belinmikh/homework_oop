@@ -1,5 +1,7 @@
-import pytest
 from typing import Any
+
+import pytest
+
 from src.models import Category, Product
 
 
@@ -14,12 +16,12 @@ from src.models import Category, Product
         ("name5", "desc5", 123, -123, ValueError),
     ],
 )
-def test_product_init_raises(name, description, price, quantity, test_ex):
+def test_product_init_raises(name: Any, description: Any, price: Any, quantity: Any, test_ex: Any) -> None:
     with pytest.raises(test_ex):
         Product(name, description, price, quantity)
 
 
-def test_product_init():
+def test_product_init() -> None:
     p = Product("bimbim", "bambam", 123, 123)
 
     assert p.name == "bimbim"
@@ -37,12 +39,12 @@ def test_product_init():
         ("name3", "desc3", ["bimbim", "bambam"], TypeError),
     ],
 )
-def test_category_init_raises(name, description, products, test_ex):
+def test_category_init_raises(name: Any, description: Any, products: Any, test_ex: Any) -> None:
     with pytest.raises(test_ex):
         Category(name, description, products)
 
 
-def test_category_init_counts():
+def test_category_init_counts() -> None:
     # while we aren't using __del__ or something
     Category.category_count = 0
     Category.product_count = 0
@@ -50,18 +52,18 @@ def test_category_init_counts():
     assert Category.category_count == 0
     assert Category.product_count == 0
 
-    c0 = Category("name0", "desc0", [Product("a", "b", 1, 1), Product("c", "d", 1, 1)])
+    Category("name0", "desc0", [Product("a", "b", 1, 1), Product("c", "d", 1, 1)])
 
     assert Category.category_count == 1
     assert Category.product_count == 2
 
-    c1 = Category("name1", "desc1", [Product("e", "f", 1, 1), Product("g", "h", 1, 1), Product("i", "j", 1, 1)])
+    Category("name1", "desc1", [Product("e", "f", 1, 1), Product("g", "h", 1, 1), Product("i", "j", 1, 1)])
 
     assert Category.category_count == 2
     assert Category.product_count == 5
 
 
-def test_category_init_local():
+def test_category_init_local() -> None:
     p0 = Product("a", "b", 1, 1)
     p1 = Product("c", "d", 1, 1)
 
@@ -72,6 +74,6 @@ def test_category_init_local():
     assert c0.products == [p0, p1]
 
 
-def test_category_init_empty():
+def test_category_init_empty() -> None:
     c0 = Category("name", "desc")
     assert c0.products == []

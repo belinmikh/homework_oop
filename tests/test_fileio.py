@@ -1,18 +1,13 @@
-from src.fileio import read_json
 from typing import Any
+from unittest.mock import mock_open, patch
 
-from unittest.mock import patch, mock_open
-
+from src.fileio import read_json
 from src.models import Category
 
 
-@patch(
-    "builtins.open",
-    new_callable=mock_open,
-    read_data=None
-)
+@patch("builtins.open", new_callable=mock_open, read_data=None)
 @patch("json.load")
-def test_read_json(mock_load: Any, mock_file: Any):
+def test_read_json(mock_load: Any, mock_file: Any) -> None:
     # while we aren't using __del__ or something
     Category.category_count = 0
     Category.product_count = 0
@@ -20,7 +15,8 @@ def test_read_json(mock_load: Any, mock_file: Any):
     mock_load.return_value = [
         {
             "name": "Смартфоны",
-            "description": "Смартфоны, как средство не только коммуникации, но и получение дополнительных функций для удобства жизни",
+            "description": "Смартфоны, как средство не только коммуникации, "
+            "но и получение дополнительных функций для удобства жизни",
             "products": [
                 {
                     "name": "Samsung Galaxy C23 Ultra",
@@ -34,7 +30,9 @@ def test_read_json(mock_load: Any, mock_file: Any):
         },
         {
             "name": "Телевизоры",
-            "description": "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником",
+            "description": "Современный телевизор, "
+            "который позволяет наслаждаться просмотром, "
+            "станет вашим другом и помощником",
             "products": [
                 {"name": '55" QLED 4K', "description": "Фоновая подсветка", "price": 123000.0, "quantity": 7}
             ],
