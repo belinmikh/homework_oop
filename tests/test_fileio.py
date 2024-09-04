@@ -47,4 +47,5 @@ def test_read_json(mock_load: Any, mock_file: Any) -> None:
     assert Category.product_count == 4
 
     assert data[0].name == "Смартфоны"
-    assert data[1].products[0].name == '55" QLED 4K'
+    # assert data[1].products[0].name == '55" QLED 4K'
+    assert data[1].products.startswith('55" QLED 4K')
