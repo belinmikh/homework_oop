@@ -83,7 +83,7 @@ class Category:
         if not isinstance(p, Product):
             raise TypeError("Product class object expected")
         self.__products.append(p)
-        self.product_count += 1
+        Category.product_count += 1
 
     @property
     def products(self) -> str:
