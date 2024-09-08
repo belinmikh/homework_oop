@@ -1,4 +1,5 @@
 from typing import Any
+from unittest.mock import patch
 
 import pytest
 
@@ -14,6 +15,7 @@ from src.models import Category, Product
         ("name3", "desc3", 123, "quant3", TypeError),
         ("name4", "desc4", 123, 123.0, TypeError),
         ("name5", "desc5", 123, -123, ValueError),
+        ("name6", "desc6", -123, 123, TypeError),
     ],
 )
 def test_product_init_raises(name: Any, description: Any, price: Any, quantity: Any, test_ex: Any) -> None:
@@ -28,6 +30,47 @@ def test_product_init() -> None:
     assert p.description == "bambam"
     assert p.price == 123
     assert p.quantity == 123
+
+
+@patch("builtins.input")
+def test_product_price(input_mock: Any) -> None:
+    input_mock.return_value = "y"
+
+    p = Product("a", "b", 123, 123)
+
+    p.price = 456
+    assert p.price == 456
+
+    with pytest.raises(TypeError):
+        p.price = "a"
+
+    with pytest.raises(TypeError):
+        p.price = -123
+
+    assert p.price == 456
+
+    p.price = 123
+    assert p.price == 123
+
+    input_mock.return_value = "n"
+
+    p.price = 38
+    assert p.price == 123
+
+
+def test_product_new_product() -> None:
+    p = Product.new_product({"name": "a", "description": "b", "price": 123, "quantity": 123})
+
+    assert p.name == "a"
+    assert p.description == "b"
+    assert p.price == 123.0
+    assert p.quantity == 123
+
+    with pytest.raises(TypeError):
+        Product.new_product("abobus")
+
+    with pytest.raises(TypeError):
+        Product.new_product({"bimbim": "bambam"})
 
 
 @pytest.mark.parametrize(
@@ -71,9 +114,33 @@ def test_category_init_local() -> None:
 
     assert c0.name == "name0"
     assert c0.description == "desc0"
-    assert c0.products == [p0, p1]
+    # assert c0.products == [p0, p1]
+    assert c0.products == "a, 1.0 руб. Остаток: 1 шт.\nc, 1.0 руб. Остаток: 1 шт."
 
 
 def test_category_init_empty() -> None:
     c0 = Category("name", "desc")
-    assert c0.products == []
+    # assert c0.products == []
+    assert c0.products == ""
+
+
+def test_category_add_product() -> None:
+    # while we aren't using __del__ or something
+    Category.category_count = 0
+    Category.product_count = 0
+
+    c = Category("a", "b")
+
+    assert Category.product_count == 0
+
+    with pytest.raises(TypeError):
+        c.add_product("abobus")
+
+    assert Category.product_count == 0
+
+    p = Product("a", "b", 123, 123)
+
+    c.add_product(p)
+
+    assert c.products == "a, 123.0 руб. Остаток: 123 шт."
+    assert c.product_count == 1

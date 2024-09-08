@@ -2,6 +2,25 @@
 
 ## Initialized with poetry
 
+## v2.0:
+
+### Module 'src/models.py':
+
+    > added Product price field getter and setter, made field private
+    > added Category products field getter, made field private
+
+    > added Product new_product class method to init Product with dictionary
+    > added Category add_product method to append its products
+
+### File 'main.py':
+    
+    > Example of working with models new functionality
+
+### General:
+
+    > 100% test covered
+    > Typos fixed
+
 ## v1.0:
 
 ### Module 'src/models.py':
