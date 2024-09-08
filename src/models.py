@@ -40,13 +40,21 @@ class Product:
             raise TypeError("Positive number was expected for the price")
 
     @classmethod
-    def new_product(cls, product: dict): # how to type that?
+    def new_product(cls, product: dict):  # how to type that?
         if not isinstance(product, dict):
             raise TypeError("Dictionary expected")
         try:
             return cls(product["name"], product["description"], product["price"], product["quantity"])
         except Exception as ex:
             raise TypeError(f"Bad dict format: {ex}")
+
+    def __str__(self) -> str:
+        return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
+
+    def __add__(self, other) -> float:
+        if not isinstance(other, self.__class__):
+            raise TypeError(f"Can't add different types ({type(self)} + {type(other)})")
+        return self.__price * self.quantity + other.price * other.quantity
 
 
 class Category:
@@ -89,5 +97,8 @@ class Category:
     def products(self) -> str:
         result = []
         for p in self.__products:
-            result.append(f"{p.name}, {p.price} руб. Остаток: {p.quantity} шт.")
+            result.append(str(p))
         return "\n".join(result)
+
+    def __str__(self) -> str:
+        return f"{self.name}, количество продуктов: " f"{sum([p.quantity for p in self.__products])} шт."
