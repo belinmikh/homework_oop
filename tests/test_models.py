@@ -73,6 +73,27 @@ def test_product_new_product() -> None:
         Product.new_product({"bimbim": "bambam"})
 
 
+def test_product_str() -> None:
+    p = Product("a", "b", 1, 2)
+    assert str(p) == "a, 1.0 руб. Остаток: 2 шт."
+
+
+def test_product_add() -> None:
+    p0 = Product("a", "b", 2, 3)
+    p1 = Product("c", "d", 4, 5)
+
+    # 2 * 3 + 4 * 5 = 26
+    assert p0 + p1 == 26
+    # adding logic can be on purpose non-symmetric in some cases I believe
+    assert p1 + p0 == 26
+
+    with pytest.raises(TypeError):
+        p0 + 123
+
+    with pytest.raises(TypeError):
+        "abobus" + p1
+
+
 @pytest.mark.parametrize(
     "name, description, products, test_ex",
     [
@@ -144,3 +165,10 @@ def test_category_add_product() -> None:
 
     assert c.products == "a, 123.0 руб. Остаток: 123 шт."
     assert c.product_count == 1
+
+
+def test_category_str() -> None:
+    c = Category("a", "b", [Product("c", "d", 1, 2), Product("e", "f", 3, 4)])
+
+    # 2 + 4 = 6
+    assert str(c) == "a, количество продуктов: 6 шт."

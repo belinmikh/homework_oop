@@ -2,6 +2,21 @@
 
 ## Initialized with poetry
 
+## v3.0:
+
+### Module 'src/models.py':
+
+    > added Product adding and string magic methods
+    > added Category string magic method, products getter optimized
+
+### File 'main.py':
+    
+    > Example of working with models new functionality
+
+### General:
+
+    > 100% test covered
+
 ## v2.0:
 
 ### Module 'src/models.py':
