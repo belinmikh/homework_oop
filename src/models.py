@@ -40,7 +40,7 @@ class Product:
             raise TypeError("Positive number was expected for the price")
 
     @classmethod
-    def new_product(cls, product: dict):  # how to type that?
+    def new_product(cls, product: dict) -> 'Product':
         if not isinstance(product, dict):
             raise TypeError("Dictionary expected")
         try:
@@ -51,8 +51,8 @@ class Product:
     def __str__(self) -> str:
         return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
 
-    def __add__(self, other) -> float:
-        if not isinstance(other, self.__class__):
+    def __add__(self, other: 'Product') -> float:
+        if not type(other) is type(self):
             raise TypeError(f"Can't add different types ({type(self)} + {type(other)})")
         return self.__price * self.quantity + other.price * other.quantity
 
