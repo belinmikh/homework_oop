@@ -2,20 +2,28 @@
 
 ## Initialized with poetry
 
+### General for the last version:
+    
+    > Example of working with new functionality at main.py
+    > Current test coverage: 100%
+
+## v4.0:
+
+### Module 'src/submodels.py':
+
+    > added LawnGrass and Smartphone as Product subclasses,
+        their constructors and tests
+
+### Module 'src/models.py':
+
+    > Validation of Product adding magic method changed
+
 ## v3.0:
 
 ### Module 'src/models.py':
 
     > added Product adding and string magic methods
     > added Category string magic method, products getter optimized
-
-### File 'main.py':
-    
-    > Example of working with models new functionality
-
-### General:
-
-    > 100% test covered
 
 ## v2.0:
 
@@ -27,13 +35,8 @@
     > added Product new_product class method to init Product with dictionary
     > added Category add_product method to append its products
 
-### File 'main.py':
-    
-    > Example of working with models new functionality
-
 ### General:
 
-    > 100% test covered
     > Typos fixed
 
 ## v1.0:
@@ -54,17 +57,9 @@
         - product_count
         - categoriy_count
 
-### File 'main.py':
-    
-    > Example of working with models functionality
-
 ### Module 'src/fileio.py':
 
     > added from json file reading categories and transforming them
     to objects function read_json
-
-### General:
-    
-    > 100% test covered
 
 ### _sky.pro // indpd58.0 // Belin Mikhail_
