@@ -18,7 +18,6 @@ class Smartphone(Product):
         memory: int,
         color: str,
     ):
-        super().__init__(name, description, price, quantity)
         if not isinstance(efficiency, float):
             raise TypeError("Float expected for the efficiency")
         if not isinstance(model, str):
@@ -34,6 +33,8 @@ class Smartphone(Product):
         self.model = model
         self.memory = memory
         self.color = color
+
+        super().__init__(name, description, price, quantity)
 
 
 class LawnGrass(Product):
@@ -51,7 +52,6 @@ class LawnGrass(Product):
         germination_period: str,
         color: str,
     ):
-        super().__init__(name, description, price, quantity)
         if not isinstance(country, str):
             raise TypeError("String expected for country")
         if not isinstance(germination_period, str):
@@ -62,3 +62,5 @@ class LawnGrass(Product):
         self.country = country
         self.germination_period = germination_period
         self.color = color
+
+        super().__init__(name, description, price, quantity)

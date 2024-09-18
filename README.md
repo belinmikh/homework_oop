@@ -5,7 +5,21 @@
 ### General for the last version:
     
     > Example of working with new functionality at main.py
-    > Current test coverage: 100%
+    > Current test coverage: 99%
+
+## v5.0:
+
+### Module 'src/abcs.py':
+
+    > added abstract class for products
+
+### Module 'src/mixins.py':
+
+    > added mixin for init logging
+
+### General:
+
+    > inits order fixed
 
 ## v4.0:
 
