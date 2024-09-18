@@ -1,4 +1,8 @@
-class Product:
+from src.abcs import BaseProduct
+from src.mixins import MixinLog
+
+
+class Product(BaseProduct, MixinLog):
     name: str
     description: str
     __price: float
@@ -23,6 +27,8 @@ class Product:
         self.__price = price
         self.quantity = quantity
 
+        super().__init__()
+
     @property
     def price(self) -> float:
         return self.__price
@@ -40,7 +46,7 @@ class Product:
             raise TypeError("Positive number was expected for the price")
 
     @classmethod
-    def new_product(cls, product: dict) -> 'Product':
+    def new_product(cls, product: dict) -> "Product":
         if not isinstance(product, dict):
             raise TypeError("Dictionary expected")
         try:
@@ -51,7 +57,7 @@ class Product:
     def __str__(self) -> str:
         return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
 
-    def __add__(self, other: 'Product') -> float:
+    def __add__(self, other: "Product") -> float:
         if not type(other) is type(self):
             raise TypeError(f"Can't add different types ({type(self)} + {type(other)})")
         return self.__price * self.quantity + other.price * other.quantity
