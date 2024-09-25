@@ -7,6 +7,14 @@
     > Example of working with new functionality at main.py
     > Current test coverage: 99%
 
+## v6.0:
+
+### Module 'src/models.py':
+
+    > added middle_price method to category class
+    > product init now raises ValueError with non-positive quantity
+    (it was only for negative in previous versions)
+
 ## v5.0:
 
 ### Module 'src/abcs.py':

@@ -172,3 +172,17 @@ def test_category_str() -> None:
 
     # 2 + 4 = 6
     assert str(c) == "a, количество продуктов: 6 шт."
+
+
+def test_category_middle_price():
+    c = Category("a", "b")
+    assert c.middle_price() == 0
+
+    p0 = Product("a", "b", 10, 123)
+    p1 = Product("c", "d", 20, 123)
+
+    c.add_product(p0)
+    c.add_product(p1)
+
+    # (10 + 20) / 2 = 15
+    assert c.middle_price() == 15
