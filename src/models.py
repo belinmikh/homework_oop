@@ -19,8 +19,8 @@ class Product(BaseProduct, MixinLog):
             price = float(price)
         if not isinstance(quantity, int):
             raise TypeError("An integer was expected for the quantity")
-        if quantity < 0:
-            raise ValueError("The quantity was expected to be non-negative")
+        if quantity <= 0:
+            raise ValueError("The quantity was expected to be positive")
 
         self.name = name
         self.description = description
@@ -108,3 +108,9 @@ class Category:
 
     def __str__(self) -> str:
         return f"{self.name}, количество продуктов: " f"{sum([p.quantity for p in self.__products])} шт."
+
+    def middle_price(self):
+        try:
+            return sum(p.price for p in self.__products) / len(self.__products)
+        except ZeroDivisionError:
+            return 0
